@@ -1,18 +1,10 @@
 <script setup>
 import ProductRow from './ProductRow.vue';
-import { defineProps, } from 'vue';
+import { defineProps } from 'vue';
 
 defineProps({
     products: {
         type: Array,
-        required: true,
-    },
-    currentPage: {
-        type: Number,
-        required: true,
-    },
-    itemsPerPage: {
-        type: Number,
         required: true,
     },
 });
