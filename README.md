@@ -15,6 +15,11 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ```sh
 npm install
 ```
+## Environment Variables
+
+```sh
+VITE_BASE_URL=https://dummyjson.com
+```
 
 ### Compile and Hot-Reload for Development
 

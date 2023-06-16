@@ -4,6 +4,42 @@ table {
   border-spacing: 0;
   width: 100%;
 }
+table th {
+  background-color: hsla(160, 100%, 37%, 1);
+  color: white;
+  font-weight: normal;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+table td {
+  border-bottom: 1px solid hsla(160, 100%, 37%, 0.2);
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+table th:nth-child(1),
+table td:nth-child(1) {
+  text-align: left;
+}
+.paginatios {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #1f008e;
+}
+.detials {
+  display: flex;
+}
+.title {
+  width: 20%;
+}
+.des {
+  width: 80%;
+}
 #app {
   max-width: 1280px;
   margin: 0 auto;

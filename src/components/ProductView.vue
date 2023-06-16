@@ -1,28 +1,7 @@
-<template>
-    <div>
-        <ProductTable :products="paginatedProducts" :currentPage="currentPage" :itemsPerPage="itemsPerPage" />
-        <!-- pagination button show current page and dots previous and next button -->
-        <div>
-            <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
-            <template v-if="showStartDots">
-                <span>...</span>
-            </template>
-            <button v-for="pageNumber in visiblePageNumbers" :key="pageNumber" @click="goToPage(pageNumber)"
-                :class="{ active: pageNumber === currentPage }">
-                {{ pageNumber }}
-            </button>
-            <template v-if="showEndDots">
-                <span>...</span>
-            </template>
-            <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
-        </div>
-    </div>
-</template>
-  
 <script setup>
 import ProductTable from './ProductTable.vue';
 import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
+import ProductService from '../service/ProductService';
 
 const products = ref([]);
 const currentPage = ref(1);
@@ -30,7 +9,7 @@ const itemsPerPage = ref(5);
 
 async function fetchProducts() {
     try {
-        const response = await axios.get('https://dummyjson.com/products');
+        const response = await ProductService.getProducts();
         const sortedProducts = response.data.products.sort((a, b) => {
             // Sort by price in ascending order
             if (a.price < b.price) return -1;
@@ -105,6 +84,26 @@ function goToPage(pageNumber) {
 onMounted(fetchProducts);
 </script>
 
+<template>
+    <div>
+        <ProductTable :products="paginatedProducts" :currentPage="currentPage" :itemsPerPage="itemsPerPage" />
+        <!-- pagination -->
+        <div class="paginatios">
+            <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
+            <template v-if="showStartDots">
+                <span>...</span>
+            </template>
+            <button v-for="pageNumber in visiblePageNumbers" :key="pageNumber" @click="goToPage(pageNumber)"
+                :class="{ active: pageNumber === currentPage }">
+                {{ pageNumber }}
+            </button>
+            <template v-if="showEndDots">
+                <span>...</span>
+            </template>
+            <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+        </div>
+    </div>
+</template>
 
 <style scoped>
 .pagination {
